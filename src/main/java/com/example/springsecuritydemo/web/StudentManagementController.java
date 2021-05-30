@@ -13,6 +13,7 @@ import java.util.Objects;
 @Slf4j
 @RestController
 @RequestMapping("/management/api/v1/students")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
 public class StudentManagementController {
 
     private static final List<Student> STUDENTS = Lists.newArrayList(
@@ -22,7 +23,6 @@ public class StudentManagementController {
     );
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
     public ResponseEntity<List<Student>> getAllStudents() {
         return ResponseEntity.ok(STUDENTS);
     }
